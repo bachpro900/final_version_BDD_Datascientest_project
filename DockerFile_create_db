@@ -1,0 +1,11 @@
+FROM python:latest
+
+ADD requirements.txt books.csv ratings.csv users.csv create_db.py ./
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir requests && \
+    pip install -r requirements.txt
+
+EXPOSE 8000
+
+CMD python3 create_db.py

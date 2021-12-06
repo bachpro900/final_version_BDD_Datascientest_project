@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+
+        test_db:
+                build:
+                        context: .
+                        dockerfile: DockerFile_test_db
+                container_name: test_db
+                ports: ["8015:8015"]
+                volumes:
+                        - sql_exam_volume
+                networks:
+                        - sql_exam_network
+ 
+
+        fastapi:
+                build:
+                        context: .
+                        dockerfile: DockerFile_api
+                container_name: fastapi
+                ports: ["5010:5010"]
+                volumes:
+                        - sql_exam_volume
+                networks:
+                        - sql_exam_network
+
+volumes:
+        sql_exam_volume:
+
+networks:
+        sql_exam_network:
